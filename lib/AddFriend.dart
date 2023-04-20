@@ -17,7 +17,6 @@ class _AddFriendState extends State<AddFriend> {
     final formGlobalKey = GlobalKey <FormState>();
     final firstNameController = TextEditingController();
     final mobNoController = TextEditingController();
-    final lastNameController = TextEditingController();
     final emailController = TextEditingController();
     List<FriendForm> myRegForms = [];
 
@@ -47,7 +46,6 @@ class _AddFriendState extends State<AddFriend> {
     @override
     void dispose() {
       firstNameController.dispose();
-      lastNameController.dispose();
       mobNoController.dispose();
       emailController.dispose();
       super.dispose();
@@ -77,33 +75,13 @@ class _AddFriendState extends State<AddFriend> {
                         //maxLength: 30,
                         inputFormatters: [
                           LengthLimitingTextInputFormatter(30),
-                          FilteringTextInputFormatter.allow(RegExp('[a-zA-Z]'))
+                          FilteringTextInputFormatter.allow(RegExp('[a-zA-Z ]'))
                         ],
                         //validator: validateMobile,
                         validator: (val) {
                           // _mobile = val;
                           if (val!.length == 0) {
                             return 'Enter First Name';
-                          } else
-                            return null;
-                        },
-                      ),
-                      TextFormField(
-                        decoration: const InputDecoration(
-                            labelText: 'Last Name'),
-                        keyboardType: TextInputType.name,
-                        controller: lastNameController,
-                        //validator: validateMobile,
-                        inputFormatters: [
-                          LengthLimitingTextInputFormatter(30),
-                          FilteringTextInputFormatter.allow(RegExp('[a-zA-Z]'))
-
-                        ],
-
-                        validator: (val) {
-                          // _mobile = val;
-                          if (val!.length == 0) {
-                            return 'Enter Last Name';
                           } else
                             return null;
                         },
@@ -156,16 +134,19 @@ class _AddFriendState extends State<AddFriend> {
                           child: widget.registerForm == null
                               ? Text("Submit")
                               : Text("Edit")),
-                      Visibility(
-                          visible: widget.registerForm == null ? true : false,
-                          child: ElevatedButton(
-                              onPressed: () {
-                                Navigator.push(context, MaterialPageRoute(
-                                    builder: (context) {
-                                      return FriendList();
-                                    }));
-                              },
-                              child: Text("Show all Records")))
+                      Padding(
+                        padding: const EdgeInsets.only(top:8.0),
+                        child: Visibility(
+                            visible: widget.registerForm == null ? true : false,
+                            child: ElevatedButton(
+                                onPressed: () {
+                                  Navigator.push(context, MaterialPageRoute(
+                                      builder: (context) {
+                                        return FriendList();
+                                      }));
+                                },
+                                child: Text("Show all Records"))),
+                      )
                     ],
                   ),
                 ),

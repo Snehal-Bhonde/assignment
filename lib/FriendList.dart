@@ -14,14 +14,19 @@ class FriendList extends StatefulWidget {
 class _FriendListState extends State<FriendList> {
   List<FriendForm> myfriendsList = [];
 
+  int _selectedIndex=0;
+
 
   @override
   void initState() {
-    //_newsBloc.add(GetEmpList());
+
+    initDb();
     getRecords();
     super.initState();
   }
-
+  void initDb() async {
+    await DatabaseRepository.instance.database;
+  }
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
@@ -131,11 +136,16 @@ class _FriendListState extends State<FriendList> {
                 icon: Icon(Icons.home)),
           ),
         ],
-        currentIndex: 0,
+        currentIndex: _selectedIndex,
         selectedItemColor: Colors.black,
-        //onTap: _onItemTapped,
+        onTap: _onItemTapped,
       ),
     );
+  }
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
   }
 
 

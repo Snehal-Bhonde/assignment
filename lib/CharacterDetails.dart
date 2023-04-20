@@ -15,6 +15,8 @@ class CharacterDetails extends StatefulWidget {
 
 class _CharacterDetailsState extends State<CharacterDetails> {
   List<HogwartChars>? list;
+  int _selectedIndex = 0;
+
 
   @override
   Widget build(BuildContext context) {
@@ -77,6 +79,8 @@ class _CharacterDetailsState extends State<CharacterDetails> {
                 ),
                   );
             }),
+
+
           bottomNavigationBar: BottomNavigationBar(
             elevation: 0.0,
             items:  <BottomNavigationBarItem>[
@@ -117,12 +121,17 @@ class _CharacterDetailsState extends State<CharacterDetails> {
                     icon: Icon(Icons.home)),
               ),
             ],
-            currentIndex: 0,
+            currentIndex: _selectedIndex,
             selectedItemColor: Colors.black,
-            //onTap: _onItemTapped,
+            onTap: _onItemTapped,
           ),
 
         ));
+  }
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
   }
 
   getChar() async {

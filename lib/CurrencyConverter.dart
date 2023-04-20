@@ -21,6 +21,7 @@ class _CurrencyConverterState extends State<CurrencyConverter> {
   String fromCurrency = "USD";
   String toCurrency = "GBP";
   String? result;
+  int _selectedIndex = 0;
 
   String amount="";
 
@@ -120,6 +121,7 @@ class _CurrencyConverterState extends State<CurrencyConverter> {
       ),
       bottomNavigationBar: BottomNavigationBar(
         elevation: 0.0,
+
         items:  <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
@@ -157,13 +159,20 @@ class _CurrencyConverterState extends State<CurrencyConverter> {
                 },
                 icon: Icon(Icons.home)),
           ),
+
         ],
-        currentIndex: 0,
+        currentIndex: _selectedIndex,
         selectedItemColor: Colors.black,
-        //onTap: _onItemTapped,
+        onTap: _onItemTapped,
       ),
 
+
     );
+  }
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
   }
 
   Widget _buildDropDownButton(String currencyCategory) {
