@@ -105,7 +105,7 @@ class HogwartChars {
 class Wand {
   String? wood;
   String? core;
-  double? length;
+  dynamic? length;
 
   Wand({this.wood, this.core, this.length});
 

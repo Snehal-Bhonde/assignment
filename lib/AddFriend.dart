@@ -22,7 +22,7 @@ class _AddFriendState extends State<AddFriend> {
 
 
     void initState() {
-      initDb();
+      //initDb();
       //addRegData();
       super.initState();
     }

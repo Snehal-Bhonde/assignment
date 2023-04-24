@@ -2,6 +2,8 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:assignment/CharacterDetails.dart';
 import 'package:assignment/FriendList.dart';
+import 'package:assignment/ProfilePage.dart';
+import 'package:assignment/TabPages.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 
@@ -74,9 +76,9 @@ class _CurrencyConverterState extends State<CurrencyConverter> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Currency Converter"),
-      ),
+      // appBar: AppBar(
+      //  // title: Text("Currency Converter"),
+      // ),
       body: currencies == null
           ? Center(child: CircularProgressIndicator())
           : Container(
@@ -130,7 +132,7 @@ class _CurrencyConverterState extends State<CurrencyConverter> {
                 onPressed: () {
                   Navigator.push(context, MaterialPageRoute(
                       builder: (context) {
-                        return CharacterDetails();
+                        return TabPages();
                       }));
                 },
                 icon: Icon(Icons.home)),
@@ -145,25 +147,43 @@ class _CurrencyConverterState extends State<CurrencyConverter> {
                         return FriendList();
                       }));
                 },
-                icon: Icon(Icons.home)),
+                icon: Icon(Icons.people)),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.currency_exchange),
-            label: "Currency",
+            icon: Icon(Icons.person),
+            label: "Profile",
             activeIcon: IconButton(
                 onPressed: () {
                   Navigator.push(context, MaterialPageRoute(
                       builder: (context) {
-                        return CurrencyConverter();
+                        return ProfilePage();
                       }));
                 },
-                icon: Icon(Icons.home)),
+                icon: Icon(Icons.person)),
           ),
 
         ],
-        currentIndex: _selectedIndex,
+        //currentIndex: _selectedIndex,
         selectedItemColor: Colors.black,
-        onTap: _onItemTapped,
+        onTap: (value) {
+          if (value == 0)
+           // setState(() {_selectedIndex = value;});
+            Navigator.push(context, MaterialPageRoute(builder: (context) {
+            return CharacterDetails();
+          }));
+          if (value == 1)
+           // setState(() {_selectedIndex = value;});
+            Navigator.push(context, MaterialPageRoute(
+              builder: (context) {
+                return FriendList();
+              }));
+          if (value == 2)
+            //setState(() {_selectedIndex = value;});
+            Navigator.push(context, MaterialPageRoute(
+              builder: (context) {
+                return ProfilePage();
+              }));
+        },
       ),
 
 

@@ -2,6 +2,8 @@ import 'package:assignment/AddFriend.dart';
 import 'package:assignment/CharacterDetails.dart';
 import 'package:assignment/CurrencyConverter.dart';
 import 'package:assignment/FriendList.dart';
+import 'package:assignment/LoginPage.dart';
+import 'package:assignment/SignupPage.dart';
 import 'package:flutter/material.dart';
 
 import 'SplashScreen.dart';

@@ -1,7 +1,10 @@
 
 
 import 'package:assignment/CharacterDetails.dart';
+import 'package:assignment/LoginPage.dart';
+import 'package:assignment/TabPages.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreenPage extends StatefulWidget {
   @override
@@ -11,19 +14,38 @@ class SplashScreenPage extends StatefulWidget {
 class SplashScreen extends State<SplashScreenPage> {
 
   @override
-  void initState() {
+  void initState()  {
     //futures.add(firebaseMsgListener());
     // firebaseMsgListener();
     // callFunction();
-    new Future.delayed(
-        const Duration(seconds: 3),
-            () => Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(builder: (context) => CharacterDetails()),ModalRoute.withName('Home'),
-        ));
 
-
+    getPage();
     super.initState();
+  }
+
+  getPage() async {
+    final prefs = await SharedPreferences.getInstance();
+    var userName=prefs.getString("UserName");
+    if(userName!=null) {
+       Future.delayed(
+          const Duration(seconds: 3),
+              () =>
+              Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(builder: (context) => TabPages()),
+                ModalRoute.withName('Home'),
+              ));
+    }
+    else{
+      Future.delayed(
+          const Duration(seconds: 3),
+              () =>
+              Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(builder: (context) => LoginPage()),
+                ModalRoute.withName('Login'),
+              ));
+    }
   }
 
   @override
